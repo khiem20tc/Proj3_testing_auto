@@ -12,15 +12,20 @@ driver.findElement(By.name('keyword')).sendKeys('IT');
 driver.findElement(By.className('button searchBar__button')).click();
 
 driver.sleep(2000).then(function() {
-    driver.getTitle().then(function(title) {
-      if(title === 'Tuyển dụng, việc làm, tìm việc làm nhanh mới nhất | VietnamWorks') {
-        console.log('Test passed');
-      } else {
-        console.log('Test failed');
+    var isExistJob = {}
+    driver.findElements(By.className('block-job-list')).then(elements => {
+      console.log(elements.length)
+      if(elements.length === 1) isExistJob = true
+      else isExistJob = false
+    })
+    .then(
+      ()=> {
+        if (isExistJob === true) console.log("Passed")
+        else console.log("Failed")
+        driver.quit();
       }
-      //driver.quit();
-    });
-  });
+    );
+});
 
-// Conclude a test
+//Conclude a test
 //driver.quit();
