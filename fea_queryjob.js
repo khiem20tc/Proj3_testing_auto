@@ -20,6 +20,7 @@ driver.sleep(2000).then(function() {
     })
     .then(
       ()=> {
+        console.log(isExistJob)
         if (isExistJob === true) console.log("Passed")
         else console.log("Failed")
         driver.quit();
