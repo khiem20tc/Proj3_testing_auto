@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "delay": "^5.0.0",
     "selenium-webdriver": "^4.0.0-beta.3",
     "sleep": "^6.3.0"
   }
