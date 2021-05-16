@@ -60,7 +60,6 @@ async function runtest_byFilter(testcase, i) {
 else{
   switch (i) {
     case 1:
-      console.log("OK")
       await active_text.click()
       await driver.findElement(By.className('input')).sendKeys(testcase)
       break;
@@ -79,7 +78,7 @@ else{
   const elements = await driver.findElements(By.className('block-job-list'))
   if(elements.length === 1) isExistJob = true
   else isExistJob = false
-  //await driver.quit();
+  await driver.quit();
   callback = false
   return isExistJob
 }
