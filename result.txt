@@ -1,3 +1,1 @@
-TC_001_0: Failed
-TC_001_1: Passed
-TC_001_2: Failed
+TC_001_0: Passed

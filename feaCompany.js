@@ -5,6 +5,7 @@ const webdriver = require('selenium-webdriver'),
 const testcase = require('./input.js')
 let fs = require('fs');
 const { time } = require('console');
+const { del } = require('selenium-webdriver/http');
 
 // console.log(testcase)
 delay(1000)
@@ -58,7 +59,11 @@ const dropDown1 = await driver.findElements(By.className('select2-dropdown selec
 const inputCategorySearch = await dropDown1[0].findElement(By.className('select2-search__field')).sendKeys(testcase.category)
 const selectCategoryResult = await dropDown1[0].findElements(By.className('select2-results__option'))
 const categoryItem = await selectCategoryResult[0].getText()
+console.log( "category name" ,categoryItem)
 await formGroup[0].findElement(By.id('category-select')).sendKeys(categoryItem)
+
+await delay(100)
+// await (await formGroup[0].findElement(By.id('category-select'))).sendKeys(categoryItem)
 
 // chose location
 const selectLocation = await formGroup[1].findElement(By.id('select2-location-select-container')).click();
@@ -70,12 +75,30 @@ console.log(LocationItem)
 await formGroup[1].findElement(By.id('location-select')).sendKeys(LocationItem)
 
 //chose name company
+// await formGroup[0].submit().then(err=>{
+//     if (err)
+//     throw(err)
+// })
+// await formGroup[1].submit().then(err => {
+//     if (err) throw(err)
+// })
+const fillCompany = await driver.findElement(By.id('company-name-search'))
+await fillCompany.sendKeys(testcase.companyName == '' ? ' ' : testcase.companyName);
+if (testcase.companyName =='')
+ await fillCompany.clear()
 
-await driver.findElement(By.id('company-name-search')).sendKeys(testcase.companyName);
+// await (await driver.findElement(By.id('companyList'))).click()
+await delay(4000)
 await (await driver.findElement(By.id('btn-filter-company'))).click()
 
+console.log(testcase.onRecruit)
+if (testcase.onRecruit == true){
+    console.log('21312')
+    await (await driver.findElement(By.className('checkbox'))).click()
+}
+
 let isExistJob
-await delay(2000)
+await delay(4000)
 try {
     const wrapper = await driver.findElement(By.id("wrapper"))
     const companyList = await wrapper.findElement(By.id("companyList"));
@@ -114,7 +137,7 @@ for(i = 0; i < itemList.length ; i++){
         }
         listResultString.push(object);
     } else {
-        console.log(item)
+        // console.log(item)
          var object = {
             onRecruit:  true,
             companyName : item[1].toLowerCase(),
@@ -127,7 +150,7 @@ for(i = 0; i < itemList.length ; i++){
 
 // console.log(listResultString)
 
-// await driver.quit();
+await driver.quit();
 return  listResultString
 
 }
@@ -155,10 +178,10 @@ async function main(testcase , testName) {
         for(j ; j < testResult.length; j++){
             var isName = testcase[i].out.companyName == "" ? -2 : testResult[j].companyName.indexOf(testcase[i].out.companyName.toLowerCase())
             var isLocation = testcase[i].out.location == "" ? -2 : testResult[j].location.indexOf(testcase[i].out.location.toLowerCase())
-            var isCategory = testcase[i].out.category == "" ? true : testResult[j].category == testcase[i].out.category.toLowerCase();
+            var isCategory = testcase[i].out.category == "" ? -2 : testResult[j].category.indexOf(testcase[i].out.category.toLowerCase());
             var isOnRecruit = testcase[i].out.onRecruit == "" ? true : testResult[j].onRecruit == testcase[i].out.onRecruit;
 
-            if (isName == -1 || isCategory == false || isLocation == -1 || isOnRecruit == false){
+            if (isName == -1 || isCategory == -1 || isLocation == -1 || isOnRecruit == false){
                 console.log( isName , isLocation , isCategory , isOnRecruit)
                 result += testName + i + ": Failed\n";
                 validate = false;
