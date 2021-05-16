@@ -28,13 +28,13 @@ async function runtest_byFilter(testcase, i) {
       .forBrowser('chrome')
       .build();
   
-  let callback = true
-  while (callback == true){
+  //let callback = true
+  //while (callback == true){
   try{
   await driver.get('https://www.vietnamworks.com/tim-viec-lam/tat-ca-viec-lam?filtered=true');
     
-  let active_text = await driver.findElement(By.className('active-text'));
-  if (!active_text) {
+  //let active_text = await driver.findElement(By.className('active-text'));
+  //if (!active_text) {
   let listOfElements = await driver.findElements(By.className('active-text text-default'));
   switch (i) {
     case 1:
@@ -56,21 +56,21 @@ async function runtest_byFilter(testcase, i) {
       await listOfElements_input[1].sendKeys(testcase)
       break;
   }
-}
-else{
-  switch (i) {
-    case 1:
-      await active_text.click()
-      await driver.findElement(By.className('input')).sendKeys(testcase)
-      break;
-    case 5:
-      let listOfElements = await driver.findElements(By.className('active-text text-default'));
-      await listOfElements[0].click()
-      let listOfElements_input = await driver.findElements(By.className('input'));
-      await listOfElements_input[0].sendKeys(testcase)
-      break;
-  }
-}
+//}
+// else{
+//   switch (i) {
+//     case 1:
+//       await active_text.click()
+//       await driver.findElement(By.className('input')).sendKeys(testcase)
+//       break;
+//     case 5:
+//       let listOfElements = await driver.findElements(By.className('active-text text-default'));
+//       await listOfElements[0].click()
+//       let listOfElements_input = await driver.findElements(By.className('input'));
+//       await listOfElements_input[0].sendKeys(testcase)
+//       break;
+//   }
+// }
 
   await driver.findElement(By.className('sc-fzoXWK hnKkAN btn-search')).click();
 
@@ -79,13 +79,13 @@ else{
   if(elements.length === 1) isExistJob = true
   else isExistJob = false
   await driver.quit();
-  callback = false
+  //callback = false
   return isExistJob
 }
 catch (error) {
-  callback = true
+  return error
 }
-  }
+  //}
   }
 
 async function runtest_timequery() {
