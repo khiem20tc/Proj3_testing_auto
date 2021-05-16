@@ -1,7 +1,8 @@
 {
   "dependencies": {
+    "chromedriver": "^90.0.0",
     "delay": "^5.0.0",
-    "selenium-webdriver": "^4.0.0-beta.3",
-    "sleep": "^6.3.0"
+    "geckodriver": "^2.0.0",
+    "selenium-webdriver": "^4.0.0-beta.3"
   }
 }

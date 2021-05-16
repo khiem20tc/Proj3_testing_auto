@@ -5,16 +5,17 @@ const webdriver = require('selenium-webdriver'),
 const driver = new webdriver.Builder()
     .forBrowser('chrome')
     .build();
-
+driver.get('https://www.google.com');
 driver.get('https://secure.vietnamworks.com/login/en?client_id=3&utm_source=&utm_medium=Header');
 
-driver.findElement(By.name('username')).sendKeys('nhap_email');
-driver.findElement(By.name('password')).sendKeys('nhap_pwd');
+driver.findElement(By.name('username')).sendKeys('anh.huynh0209@outlook.com');
+driver.findElement(By.name('password')).sendKeys('0209.prtsC');
 driver.findElement(By.id('button-login')).click();
 
 driver.sleep(2000).then(function() {
     driver.getTitle().then(function(title) {
-      if(title === 'Tuyển dụng, việc làm, tìm việc làm nhanh mới nhất | VietnamWorks') {
+      console.log(title)
+      if(title === 'VietnamWorks Account') {
         console.log('Test passed');
       } else {
         console.log('Test failed');
