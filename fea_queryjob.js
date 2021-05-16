@@ -1,4 +1,4 @@
-async function runtest(testcase) {
+async function runtest_byKeyword(testcase) {
 const webdriver = require('selenium-webdriver'),
     By = webdriver.By,
     until = webdriver.until;
@@ -17,24 +17,51 @@ if(elements.length === 1) isExistJob = true
 else isExistJob = false
 await driver.quit();
 return isExistJob
-// driver.sleep(2000).then(function() {
-//       var isExistJob = {}
-//       driver.findElements(By.className('block-job-list')).then(elements => {
-//         console.log(elements.length)
-//         if(elements.length === 1) isExistJob = true
-//         else isExistJob = false
-//       })
-//       .then(
-//         ()=> {
-//           console.log(isExistJob)
-//           if (isExistJob === true) console.log("Passed")
-//           else console.log("Failed")
-//           driver.quit();
-//           return isExistJob
-//         }
-//       );
-//   });
 }
+
+async function runtest_byFilter(testcase, i) {
+  const webdriver = require('selenium-webdriver'),
+      By = webdriver.By,
+      until = webdriver.until;
+  
+  const driver = await new webdriver.Builder()
+      .forBrowser('chrome')
+      .build();
+  
+  await driver.get('https://www.vietnamworks.com/job-search/all-jobs?filtered=true');
+    
+  //await driver.findElement(By.className('active-text text-default')).click();
+  let listOfElements = await driver.findElements(By.className('active-text text-default'));
+  switch (i) {
+    case 1:
+      await listOfElements[0].click()
+      break;
+    case 5:
+      await listOfElements[1].click()
+      break;
+  }
+
+  //await driver.findElement(By.className('input')).sendKeys(testcase);
+
+  let listOfElements_input = await driver.findElements(By.className('input'));
+  switch (i) {
+    case 1:
+      await listOfElements_input[0].sendKeys(testcase)
+      break;
+    case 5:
+      await listOfElements_input[1].sendKeys(testcase)
+      break;
+  }
+
+  await driver.findElement(By.className('sc-fzoXWK hnKkAN btn-search')).click();
+
+  let isExistJob
+  const elements = await driver.findElements(By.className('block-job-list'))
+  if(elements.length === 1) isExistJob = true
+  else isExistJob = false
+  await driver.quit();
+  return isExistJob
+  }
 
 async function main() {
   let fs = require('fs');
@@ -51,7 +78,13 @@ async function main() {
 
   let result = []
   for (let i=0;i<testcase.length;i++){
-    let data = await runtest(testcase[i].toString())
+    let data
+    if (i==1 || i==5 || i==7) {
+      data = await runtest_byFilter(testcase[i].toString(),i)
+    }
+    else {
+      data = await runtest_byKeyword(testcase[i].toString())
+    }
     console.log(data)
     result.push(data)
   }
