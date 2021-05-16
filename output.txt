@@ -1,9 +1,10 @@
-false
-true
-true
-true
-true
-true
-true
-true
-true
+Khong tim thay viec lam phu hop
+Tim thay viec lam phu hop
+Tim thay viec lam phu hop
+Tim thay viec lam phu hop
+Tim thay viec lam phu hop
+Tim thay viec lam phu hop
+Tim thay viec lam phu hop
+Tim thay viec lam phu hop
+Tim thay viec lam phu hop
+50

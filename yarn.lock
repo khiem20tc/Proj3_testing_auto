@@ -87,6 +87,11 @@ lie@~3.3.0:
   dependencies:
     immediate "~3.0.5"
 
+log@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/log/-/log-1.4.0.tgz#4ba1d890fde249b031dca03bc37eaaf325656f1c"
+  integrity sha1-S6HYkP3iSbAx3KA7w36q8yVlbxw=
+
 minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
@@ -115,6 +120,14 @@ path-is-absolute@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
   integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
+
+performance@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/performance/-/performance-1.4.0.tgz#895fd61a19e337005aa6a6f8c5ca5aec8fb01cc6"
+  integrity sha512-0e98N5lSIe7Nuts/4MW/6D1q+c5qT74yEv/t/TneeFeGl5wgoaiDzQPSvNL/Qe5vFFRvQsqHCrv83Y4GB33Xnw==
+  dependencies:
+    stdio "*"
+    testing "*"
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
@@ -175,12 +188,24 @@ sleep@^6.3.0:
   dependencies:
     nan "^2.14.1"
 
+stdio@*:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/stdio/-/stdio-2.1.1.tgz#10e488439610383615505c336e4cd9f9c75eafe6"
+  integrity sha512-ZHO7SD10nZnc2pMN85MPPTCKutXPKH+7Z50B7zt/JRNAHXLbI3BidMc9HFD/j2VupZ8lQdSVJB0ebZSVXC6uXw==
+
 string_decoder@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
   integrity sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==
   dependencies:
     safe-buffer "~5.1.0"
+
+testing@*:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/testing/-/testing-2.0.1.tgz#50fd76afe0280a3af36282e0838e8cc8c0c48111"
+  integrity sha512-2zQ08tZ0fm7ziEsST6DIzIear/sz7AntmxlGsBm+1OPY1ymVzc9HGcLqLuJhwON1npQW/M2eRsukPliSSma+1Q==
+  dependencies:
+    log "1.4.0"
 
 tmp@^0.2.1:
   version "0.2.1"
