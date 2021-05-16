@@ -28,9 +28,13 @@ async function runtest_byFilter(testcase, i) {
       .forBrowser('chrome')
       .build();
   
-  await driver.get('https://www.vietnamworks.com/job-search/all-jobs?filtered=true');
+  let callback = true
+  while (callback == true){
+  try{
+  await driver.get('https://www.vietnamworks.com/tim-viec-lam/tat-ca-viec-lam?filtered=true');
     
-  //await driver.findElement(By.className('active-text text-default')).click();
+  let active_text = await driver.findElement(By.className('active-text'));
+  if (!active_text) {
   let listOfElements = await driver.findElements(By.className('active-text text-default'));
   switch (i) {
     case 1:
@@ -52,6 +56,22 @@ async function runtest_byFilter(testcase, i) {
       await listOfElements_input[1].sendKeys(testcase)
       break;
   }
+}
+else{
+  switch (i) {
+    case 1:
+      console.log("OK")
+      await active_text.click()
+      await driver.findElement(By.className('input')).sendKeys(testcase)
+      break;
+    case 5:
+      let listOfElements = await driver.findElements(By.className('active-text text-default'));
+      await listOfElements[0].click()
+      let listOfElements_input = await driver.findElements(By.className('input'));
+      await listOfElements_input[0].sendKeys(testcase)
+      break;
+  }
+}
 
   await driver.findElement(By.className('sc-fzoXWK hnKkAN btn-search')).click();
 
@@ -59,8 +79,14 @@ async function runtest_byFilter(testcase, i) {
   const elements = await driver.findElements(By.className('block-job-list'))
   if(elements.length === 1) isExistJob = true
   else isExistJob = false
-  await driver.quit();
+  //await driver.quit();
+  callback = false
   return isExistJob
+}
+catch (error) {
+  callback = true
+}
+  }
   }
 
 async function runtest_timequery() {
